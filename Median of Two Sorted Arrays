@@ -1,0 +1,50 @@
+#include <limits.h>
+#include <math.h>
+
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
+double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size) {
+    // Ensure nums1 is the smaller array to minimize binary search range
+    if (nums1Size > nums2Size) {
+        return findMedianSortedArrays(nums2, nums2Size, nums1, nums1Size);
+    }
+
+    int m = nums1Size;
+    int n = nums2Size;
+    int low = 0, high = m;
+    int halfLen = (m + n + 1) / 2;
+
+    while (low <= high) {
+        int i = (low + high) / 2;    // Partition for nums1
+        int j = halfLen - i;        // Partition for nums2
+
+        // Handle boundaries: Use INT_MIN/INT_MAX if partition is at the edges
+        int maxLeft1 = (i == 0) ? INT_MIN : nums1[i - 1];
+        int minRight1 = (i == m) ? INT_MAX : nums1[i];
+
+        int maxLeft2 = (j == 0) ? INT_MIN : nums2[j - 1];
+        int minRight2 = (j == n) ? INT_MAX : nums2[j];
+
+        if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {
+            // Found the correct partition
+            if ((m + n) % 2 != 0) {
+                // Odd total length
+                return (double)MAX(maxLeft1, maxLeft2);
+            } else {
+                // Even total length
+                int leftMax = MAX(maxLeft1, maxLeft2);
+                int rightMin = MIN(minRight1, minRight2);
+                return (leftMax + rightMin) / 2.0;
+            }
+        } else if (maxLeft1 > minRight2) {
+            // i is too big, must move left
+            high = i - 1;
+        } else {
+            // i is too small, must move right
+            low = i + 1;
+        }
+    }
+
+    return 0.0;
+}
