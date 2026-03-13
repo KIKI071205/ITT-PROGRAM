@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+long long solve() {
+    int N;
+    if (scanf("%d", &N) != 1) return -1;
+
+    long long A[N];
+    long long total_sum = 0;
+    for (int i = 0; i < N; i++) {
+        scanf("%lld", &A[i]);
+        total_sum += A[i];
+    }
+
+    // Special case for N = 1
+    if (N == 1) {
+        return (A[0] == 0) ? 0 : -1;
+    }
+
+    // total_sum must be divisible by (N - 1)
+    if (total_sum % (N - 1) != 0) {
+        return -1;
+    }
+
+    long long K = total_sum / (N - 1);
+
+    // Each element A[i] must be <= K because A[i] = K - (times skipped)
+    // and times skipped cannot be negative.
+    for (int i = 0; i < N; i++) {
+        if (A[i] > K) {
+            return -1;
+        }
+    }
+
+    return K;
+}
+
+int main() {
+    int T;
+    if (scanf("%d", &T) != 1) return 0;
+    while (T--) {
+        printf("%lld\n", solve());
+    }
+    return 0;
+}
