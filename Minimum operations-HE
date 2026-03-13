@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+long long solve() {
+    int N;
+    if (scanf("%d", &N) != 1) return -1;
+    long long A[N];
+    long long S = 0;
+    for (int i = 0; i < N; i++) {
+        scanf("%lld", &A[i]);
+        S += A[i];
+    }
+
+    if (S > 0) return -1;
+
+    long long K = -S;
+    long long required_x = 0;
+
+    for (int i = 0; i < N; i++) {
+        if (A[i] < 0) {
+            // y_i = 2x_i + A[i]. Since y_i >= 0, 2x_i >= -A[i]
+            // x_i >= ceil(-A[i] / 2.0)
+            required_x += (-A[i] + 1) / 2;
+        }
+    }
+
+    if (required_x <= K) {
+        return K;
+    } else {
+        return -1;
+    }
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+    while (T--) {
+        printf("%lld\n", solve());
+    }
+    return 0;
+}
