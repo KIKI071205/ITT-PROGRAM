@@ -1,0 +1,31 @@
+class Solution:
+    def letterCombinations(self, digits: str) -> list[str]:
+        if not digits:
+            return []
+        
+        # Keypad mapping
+        phone = {
+            "2": "abc", "3": "def", "4": "ghi", "5": "jkl",
+            "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"
+        }
+        
+        res = []
+        
+        def backtrack(index, current_path):
+            # Base case: if the combination is the same length as digits
+            if len(current_path) == len(digits):
+                res.append("".join(current_path))
+                return
+            
+            # Get the letters for the current digit
+            possible_letters = phone[digits[index]]
+            
+            for letter in possible_letters:
+                # Add the letter and move to the next digit
+                current_path.append(letter)
+                backtrack(index + 1, current_path)
+                # Backtrack: remove the letter before trying the next one
+                current_path.pop()
+        
+        backtrack(0, [])
+        return res
