@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+#define MOD 1000000007
+
+// Function to calculate if the number of set bits is odd (1) or even (0)
+int get_parity(unsigned int n) {
+    int count = 0;
+    while (n > 0) {
+        n &= (n - 1);
+        count++;
+    }
+    return count % 2;
+}
+
+void solve() {
+    int n;
+    if (scanf("%d", &n) != 1) return;
+
+    // sum0 starts at 1 because the empty prefix (index 0) 
+    // has an XOR sum of 0, which has 0 set bits (even).
+    long long sum0 = 1; 
+    long long sum1 = 0;
+    int current_prefix_parity = 0;
+    long long current_dp = 0;
+
+    for (int i = 0; i < n; i++) {
+        unsigned int a;
+        scanf("%u", &a);
+
+        // Update the parity of the prefix XOR
+        current_prefix_parity ^= get_parity(a);
+
+        if (current_prefix_parity == 1) {
+            // We need a previous prefix with parity 0
+            current_dp = sum0;
+            // Add current_dp to the sum of paths ending in parity 1
+            sum1 = (sum1 + current_dp) % MOD;
+        } else {
+            // We need a previous prefix with parity 1
+            current_dp = sum1;
+            // Add current_dp to the sum of paths ending in parity 0
+            sum0 = (sum0 + current_dp) % MOD;
+        }
+    }
+
+    // The answer is the number of ways to partition the full array
+    printf("%lld\n", current_dp);
+}
+
+int main() {
+    int t;
+    if (scanf("%d", &t) != 1) return 0;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
