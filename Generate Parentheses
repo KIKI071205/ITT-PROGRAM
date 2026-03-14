@@ -1,0 +1,20 @@
+class Solution:
+    def generateParenthesis(self, n: int):
+        res = []
+        
+        def backtrack(open_count, close_count, current_string):
+            # Base case: string is complete
+            if len(current_string) == n * 2:
+                res.append(current_string)
+                return
+            
+            # Rule 1: Can we add an '('?
+            if open_count < n:
+                backtrack(open_count + 1, close_count, current_string + "(")
+            
+            # Rule 2: Can we add a ')'?
+            if close_count < open_count:
+                backtrack(open_count, close_count + 1, current_string + ")")
+        
+        backtrack(0, 0, "")
+        return res
