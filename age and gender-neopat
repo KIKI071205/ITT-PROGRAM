@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int age,gender;
+    cin>>age>>gender;
+    if((age<25)&&(gender==1))
+    cout<<"The person belongs to Group 1.";
+    else if((age<25)&&(gender==2))
+    cout<<"The person belongs to Group 2.";
+    else if((age<46)&&(gender==1))
+    cout<<"The person belongs to Group 3.";
+    else if((age<46)&&(gender==2))
+    cout<<"The person belongs to Group 4.";
+    else if((age>45)&&(gender==1)||(gender==2))
+    cout<<"The person belongs to Group 5.";
+    else
+    cout<<"Invalid";
+    return 0;
+}
