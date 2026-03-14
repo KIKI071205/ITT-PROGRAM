@@ -1,0 +1,10 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int k;
+    char l;
+    float m;
+    cin>>l>>k>>m;
+    cout<<l<<" "<<k<<" "<<fixed<<setprecision(2)<<m;
+}
