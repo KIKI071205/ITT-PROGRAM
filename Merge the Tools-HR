@@ -1,0 +1,11 @@
+def merge_the_tools(string, k):
+    # Iterate through the string in steps of k
+    for i in range(0, len(string), k):
+        # Extract the current substring of length k
+        t_i = string[i : i + k]
+        
+        # Use dict.fromkeys to remove duplicates while keeping order
+        # dict.fromkeys('AAB') creates {'A': None, 'B': None}
+        u_i = "".join(dict.fromkeys(t_i))
+        
+        print(u_i)
