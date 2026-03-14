@@ -1,0 +1,24 @@
+class Solution(object):
+    def reverse(self, x):
+        # Define 32-bit signed boundaries
+        # -2^31 to 2^31 - 1
+        MIN_INT = -2147483648
+        MAX_INT = 2147483647
+        
+        # Determine the sign
+        sign = -1 if x < 0 else 1
+        
+        # Work with absolute value for reversing
+        abs_x = abs(x)
+        
+        # Reverse the digits using string slicing
+        # 1. Convert to string
+        # 2. Reverse with [::-1]
+        # 3. Convert back to integer
+        reversed_val = int(str(abs_x)[::-1]) * sign
+        
+        # Check for 32-bit overflow
+        if reversed_val < MIN_INT or reversed_val > MAX_INT:
+            return 0
+            
+        return reversed_val
