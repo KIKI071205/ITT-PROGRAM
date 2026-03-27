@@ -1,0 +1,6 @@
+from collections import Counter
+s = input().strip()
+counts = Counter(s)
+sorted_chars = sorted(counts.items(), key=lambda x: (-x[1], x[0]))
+for char, count in sorted_chars[:3]:
+    print(f"{char} {count}")
