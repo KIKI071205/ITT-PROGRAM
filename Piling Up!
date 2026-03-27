@@ -1,0 +1,24 @@
+from collections import deque
+
+def solve():
+   t = int(input())
+   for _ in range(t):
+        n = int(input())
+        cubes = deque(map(int, input().split()))
+        last_picked = float('inf')
+        possible = True
+    while cubes:
+         if cubes[0] >= cubes[-1]:
+                current = cubes.popleft()
+            else:
+                current = cubes.pop()
+         if current > last_picked:
+                possible = False
+                break
+            
+            last_picked = current
+            
+        print("Yes" if possible else "No")
+
+if __name__ == "__main__":
+    solve()
