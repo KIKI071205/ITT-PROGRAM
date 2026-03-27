@@ -1,0 +1,26 @@
+from collections import deque
+
+
+d = deque()
+
+
+n = int(input())
+
+
+for _ in range(n):
+    
+    input_line = input().split()
+    method_name = input_line[0]
+    
+    
+    if method_name == 'append':
+        d.append(input_line[1])
+    elif method_name == 'appendleft':
+        d.appendleft(input_line[1])
+    elif method_name == 'pop':
+        d.pop()
+    elif method_name == 'popleft':
+        d.popleft()
+
+
+print(*(d))
