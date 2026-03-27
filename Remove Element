@@ -1,0 +1,16 @@
+class Solution:
+    def removeElement(self, nums, val):
+        # k will track the position of elements not equal to val
+        k = 0
+        
+        # Iterate through the entire array
+        for i in range(len(nums)):
+            # If the current element is not the one we want to remove
+            if nums[i] != val:
+                # Move it to the front at index k
+                nums[k] = nums[i]
+                # Increment k to the next available slot
+                k += 1
+                
+        # k is the count of elements that are not equal to val
+        return k
