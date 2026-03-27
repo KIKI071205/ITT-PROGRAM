@@ -1,0 +1,30 @@
+class Solution:
+    def combinationSum(self, candidates, target):
+        results = []
+        # Sorting allows us to stop early once the numbers get too big
+        candidates.sort()
+        
+        def backtrack(remain, combo, start):
+            if remain == 0:
+                # Found a valid combination, append a copy
+                results.append(list(combo))
+                return
+            
+            for i in range(start, len(candidates)):
+                # If the current candidate is larger than what's left, 
+                # all candidates after it will also be too large (pruning)
+                if candidates[i] > remain:
+                    break
+                
+                # Add the number to the combination
+                combo.append(candidates[i])
+                
+                # Recurse: Note we pass 'i' as the start index because 
+                # we can reuse the current number
+                backtrack(remain - candidates[i], combo, i)
+                
+                # Backtrack: remove the number before trying the next one
+                combo.pop()
+                
+        backtrack(target, [], 0)
+        return results
