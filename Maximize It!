@@ -1,0 +1,25 @@
+from itertools import product
+
+# 1. Read K and M
+k, m = map(int, input().split())
+
+# 2. Read each list and store the squares of its elements
+# We use [1:] to skip the first number in each line (the count Ni)
+lists = []
+for _ in range(k):
+    # Calculate x^2 for each x in the input line
+    row = [int(x)**2 for x in input().split()[1:]]
+    lists.append(row)
+
+# 3. Use product to find all combinations of picking one item from each list
+max_value = 0
+for combination in product(*lists):
+    # Calculate (sum of squares) % M
+    current_sum = sum(combination) % m
+    
+    # Update max_value if current_sum is larger
+    if current_sum > max_value:
+        max_value = current_sum
+
+# 4. Print the result
+print(max_value)
