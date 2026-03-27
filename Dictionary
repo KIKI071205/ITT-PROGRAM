@@ -1,0 +1,26 @@
+import sys
+
+def solve():
+    # Read all input at once for speed
+    input_data = sys.stdin.read().split()
+    
+    if not input_data:
+        return
+        
+    n = int(input_data[0])
+    words = input_data[1:]
+    
+    word_counts = {}
+    
+    for word in words:
+        # Increment count if word exists, otherwise initialize to 1
+        word_counts[word] = word_counts.get(word, 0) + 1
+        
+    # First line: Number of distinct words
+    print(len(word_counts))
+    
+    # Second line: Counts joined by a space
+    print(*(word_counts.values()))
+
+if __name__ == "__main__":
+    solve()
