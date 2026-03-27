@@ -1,0 +1,12 @@
+class Solution:
+    def strStr(self, haystack, needle):
+        n = len(haystack)
+        m = len(needle)
+        
+        # We only need to check up to the point where needle could still fit
+        for i in range(n - m + 1):
+            # Check if the slice matches the needle
+            if haystack[i : i + m] == needle:
+                return i
+                
+        return -1
