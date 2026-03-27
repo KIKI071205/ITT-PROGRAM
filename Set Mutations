@@ -1,0 +1,8 @@
+n = int(input())
+a = set(map(int, input().split()))
+num_ops = int(input())
+for _ in range(num_ops):
+    op_name = input().split()[0]
+    other_set = set(map(int, input().split()))
+    getattr(a, op_name)(other_set)
+print(sum(a))
