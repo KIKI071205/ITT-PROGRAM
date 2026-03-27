@@ -1,0 +1,25 @@
+class Solution:
+    def countAndSay(self, n):
+        # Base case
+        result = "1"
+        
+        # We already have n=1, so we iterate n-1 more times
+        for _ in range(n - 1):
+            next_string = ""
+            i = 0
+            
+            # Process the current string to generate the next one
+            while i < len(result):
+                count = 1
+                # While the next character is the same, increment count
+                while i + 1 < len(result) and result[i] == result[i + 1]:
+                    i += 1
+                    count += 1
+                
+                # Append "count" then "character"
+                next_string += str(count) + result[i]
+                i += 1
+            
+            result = next_string
+            
+        return result
