@@ -1,0 +1,25 @@
+class Solution:
+    def longestValidParentheses(self, s):
+        # Stack starts with -1 to handle base cases for length calculation
+        stack = [-1]
+        max_length = 0
+        
+        for i in range(len(s)):
+            if s[i] == '(':
+                # Push the index of the opening bracket
+                stack.append(i)
+            else:
+                # Pop the last opening bracket's index (or the base index)
+                stack.pop()
+                
+                if not stack:
+                    # If stack is empty, this ')' is a mismatch
+                    # Push its index as the new base
+                    stack.append(i)
+                else:
+                    # Current valid length is current index minus the new top
+                    current_length = i - stack[-1]
+                    if current_length > max_length:
+                        max_length = current_length
+                        
+        return max_length
