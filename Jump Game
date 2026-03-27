@@ -1,0 +1,18 @@
+class Solution:
+    def canJump(self, nums: list[int]) -> bool:
+        gas = 0
+        n = len(nums)
+        
+        for i in range(n):
+            # If the current index is beyond our reach, we're stuck
+            if i > gas:
+                return False
+            
+            # Update the furthest we can reach from the current position
+            gas = max(gas, i + nums[i])
+            
+            # Optimization: If we can already reach the end, stop early
+            if gas >= n - 1:
+                return True
+                
+        return True
