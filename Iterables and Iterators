@@ -1,0 +1,10 @@
+import math
+n = int(input())
+letters = input().split()
+k = int(input())
+num_a = letters.count('a')
+num_not_a = n - num_a
+total_combinations = math.comb(n, k)
+bad_combinations = math.comb(num_not_a, k)
+probability = 1 - (bad_combinations / total_combinations)
+print(f"{probability:.4f}")
