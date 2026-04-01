@@ -1,0 +1,27 @@
+class Solution:
+    def isNumber(self, s: str) -> bool:
+        digit = dot = exp = False
+        
+        for i, char in enumerate(s):
+            if char.isdigit():
+                digit = True
+            elif char in "+-":
+               
+                if i > 0 and s[i-1] not in "eE":
+                    return False
+            elif char in "eE":
+              
+                if exp or not digit:
+                    return False
+                exp = True
+                digit = False 
+            elif char == ".":
+               
+                if dot or exp:
+                    return False
+                dot = True
+            else:
+              
+                return False
+                
+        return digit
