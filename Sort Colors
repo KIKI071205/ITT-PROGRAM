@@ -1,0 +1,23 @@
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        low = 0
+        curr = 0
+        high = len(nums) - 1
+
+        while curr <= high:
+            if nums[curr] == 0:
+                # Swap 0 to the front
+                nums[low], nums[curr] = nums[curr], nums[low]
+                low += 1
+                curr += 1
+            elif nums[curr] == 2:
+                # Swap 2 to the back
+                # Don't increment curr yet, need to check the swapped value!
+                nums[curr], nums[high] = nums[high], nums[curr]
+                high -= 1
+            else:
+                # It's a 1, just move forward
+                curr += 1
