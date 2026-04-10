@@ -1,0 +1,23 @@
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        res = []
+        
+        def backtrack(start, path):
+            # Base case: if combination is length k
+            if len(path) == k:
+                res.append(list(path))
+                return
+            
+            # Optimization: only loop while there are enough numbers left to pick
+            # (n - i + 1) is the number of elements available
+            # (k - len(path)) is the number of elements we still need
+            for i in range(start, n + 1):
+                if (n - i + 1) < (k - len(path)):
+                    break
+                    
+                path.append(i)
+                backtrack(i + 1, path)
+                path.pop() # Backtrack step
+        
+        backtrack(1, [])
+        return res
